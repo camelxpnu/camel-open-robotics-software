@@ -34,5 +34,5 @@ public abstract class TwoPlayerTurnGame implements TurnGameInterface
 		changeCurrentPlayer();
 	}
 
-	public abstract void provideAvailableActionsAndPlay();
+	protected abstract void provideAvailableActionsAndPlay();
 }
