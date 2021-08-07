@@ -16,7 +16,8 @@ public abstract class TwoPlayerTurnGame implements TurnGameInterface
 		currentPlayer = firstPlayer;
 	}
 
-	protected void changeCurrentPlayer()
+	@Override
+	public void changePlayer()
 	{
 		if (currentPlayer == firstPlayer)
 		{
@@ -27,13 +28,4 @@ public abstract class TwoPlayerTurnGame implements TurnGameInterface
 			currentPlayer = firstPlayer;
 		}
 	}
-
-	@Override
-	public void play()
-	{
-		provideAvailableActionsAndPlay();
-		changeCurrentPlayer();
-	}
-
-	protected abstract void provideAvailableActionsAndPlay();
 }

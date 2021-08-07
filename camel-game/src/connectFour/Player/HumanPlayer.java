@@ -3,8 +3,6 @@ package connectFour.Player;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import printTools.PrintTools;
-
 public class HumanPlayer extends GamePlayer
 {
 	private Scanner scanner;
@@ -17,7 +15,7 @@ public class HumanPlayer extends GamePlayer
 	@Override
 	public int play(ArrayList<Integer> availableColumns)
 	{
-		PrintTools.info("Hey Human, where would you put your piece?");
+		System.out.println("Hey Human, where would you put your piece?");
 		showAvailableColumns(availableColumns);
 
 		int desiredColumn = -1;
@@ -33,7 +31,7 @@ public class HumanPlayer extends GamePlayer
 				if (strDesiredColumn.contains(strColumn))
 				{
 					desiredColumn = availableColumn;
-					PrintTools.info("You selected " + desiredColumn + ".");
+					System.out.println("You selected " + desiredColumn + ".");
 					return desiredColumn;
 				}
 			}

@@ -11,12 +11,14 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 	private final int numberOfColumnBoards;
 	private final ColumnBoard[] columnBoards;
 	private static final int WINNING_NUMBER = 4;
+	private int gameStatus = -1;
 
 	public ConnectFourGame(int columns, int rows, GamePlayer firstPlayer, GamePlayer secondPlayer)
 	{
 		super(firstPlayer, secondPlayer);
 
-		PrintTools.info("");
+		PrintTools.info("ConnectFourGame");
+		System.out.println("Game Start.");
 		System.out.println("First Player  : [O].");
 		System.out.println("Second Player : [X].");
 
@@ -35,7 +37,7 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 		boolean randomTurn = randomSelecter.nextBoolean();
 		if (randomTurn)
 		{
-			changeCurrentPlayer();
+			changePlayer();
 		}
 	}
 
@@ -92,6 +94,124 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 			System.out.print("-");
 		}
 		System.out.println("-");
+	}
+
+	@Override
+	public boolean checkGameCompletion()
+	{
+		/**
+		 * result(0): no more space;
+		 * result(1): vertical connect four.
+		 * result(2): horizontal connect four.
+		 * result(3): diagonal connect four(right-up direction).
+		 * result(4): diagonal connect four(right-down direction).
+		 */
+		int result = -1;
+
+		/**
+		 * check there is no more empty space of column boards.
+		 */
+		for (int i = 0; i < numberOfColumnBoards; i++)
+		{
+			if (columnBoards[i].isFull())
+			{
+				PrintTools.info(i + "column is full.");
+				if (i == numberOfColumnBoards - 1)
+				{
+					PrintTools.info("all full.");
+					result = 0;
+				}
+				continue;
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		if (isConnectFourVertical())
+		{
+			result = 1;
+		}
+
+		if (isConnectFourHorizontal())
+		{
+			result = 2;
+		}
+
+		if (isConnectFourDiagonalRightUp())
+		{
+			result = 3;
+		}
+
+		if (isConnectFourDiagonalRightDown())
+		{
+			result = 4;
+		}
+
+		if (result == -1)
+		{
+			return false;
+		}
+		else
+		{
+			switch (result)
+			{
+			case 0:
+				System.out.println("There is no more space.");
+				gameStatus = 0;
+				break;
+			case 1:
+				System.out.println("There is a connect four!(vertical)");
+				gameStatus = 1;
+				break;
+			case 2:
+				System.out.println("There is a connect four!(horizontal)");
+				gameStatus = 1;
+				break;
+			case 3:
+				System.out.println("There is a connect four!(right-up direction)");
+				gameStatus = 1;
+				break;
+			case 4:
+				System.out.println("There is a connect four!(right-down direction)");
+				gameStatus = 1;
+				break;
+			}
+			return true;
+		}
+	}
+
+	@Override
+	public void completeGame()
+	{
+		if (gameStatus == 1)
+		{
+			System.out.println("Winner is " + currentPlayer.playerType() + ".");
+		}
+		else if (gameStatus == 0)
+		{
+			System.out.println("Draw. ");
+		}
+		else
+		{
+			;
+		}
+	}
+
+	@Override
+	public void play()
+	{
+		ArrayList<Integer> availableColumns = new ArrayList<Integer>();
+		for (int i = 0; i < numberOfColumnBoards; i++)
+		{
+			if (!columnBoards[i].isFull())
+			{
+				availableColumns.add(i);
+			}
+		}
+		int playerSelction = currentPlayer.play(availableColumns);
+		columnBoards[playerSelction].insertPiece(currentPlayer.getPlayerID());
 	}
 
 	private boolean isConnectFourVertical()
@@ -208,118 +328,6 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public boolean checkGameCompletion()
-	{
-		/**
-		 * result(0): no more space;
-		 * result(1): vertical connect four.
-		 * result(2): horizontal connect four.
-		 * result(3): diagonal connect four(right-up direction).
-		 * result(4): diagonal connect four(right-down direction).
-		 */
-		int result = -1;
-
-		/**
-		 * check there is no more empty space of column boards.
-		 */
-		for (int i = 0; i < numberOfColumnBoards; i++)
-		{
-			if (columnBoards[i].isFull())
-			{
-				if (i == numberOfColumnBoards - 1)
-				{
-					result = 0;
-				}
-				continue;
-			}
-			else
-			{
-				break;
-			}
-		}
-
-		/**
-		 * check vertical connect four. if yes, result = 1;
-		 */
-		if (isConnectFourVertical())
-		{
-			result = 1;
-		}
-
-		/**
-		 * check horizontal connect four. if yes, result = 2;
-		 */
-		if (isConnectFourHorizontal())
-		{
-			result = 2;
-		}
-
-		/**
-		 * check diagonal connect four. if yes, result = 3;
-		 */
-		if (isConnectFourDiagonalRightUp())
-		{
-			result = 3;
-		}
-
-		/**
-		 * check diagonal connect four. if yes, result = 4;
-		 */
-		if (isConnectFourDiagonalRightDown())
-		{
-			result = 4;
-		}
-
-		if (result == -1)
-		{
-			return false;
-		}
-		else
-		{
-			switch (result)
-			{
-			case 0:
-				System.out.println("There is no more space.");
-				break;
-			case 1:
-				System.out.println("There is vertical connect four!");
-				break;
-			case 2:
-				System.out.println("There is horizontal connect four!");
-				break;
-			case 3:
-				System.out.println("There is diagonal(right-up direction) connect four!");
-				break;
-			case 4:
-				System.out.println("There is diagonal(right-down direction) connect four!");
-				break;
-			}
-			return true;
-		}
-	}
-
-	@Override
-	public void completeGame()
-	{
-		System.out.println("Winner is " + currentPlayer.playerType());
-	}
-
-	@Override
-	protected void provideAvailableActionsAndPlay()
-	{
-		ArrayList<Integer> availableColumns = new ArrayList<Integer>();
-		for (int i = 0; i < numberOfColumnBoards; i++)
-		{
-			if (!columnBoards[i].isFull())
-			{
-				availableColumns.add(i);
-			}
-		}
-		int playerSelction = currentPlayer.play(availableColumns);
-		columnBoards[playerSelction].insertPiece(currentPlayer.getPlayerID());
 	}
 
 	public ColumnBoard[] getColumnBoards()

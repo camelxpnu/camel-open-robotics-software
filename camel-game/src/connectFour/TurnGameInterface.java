@@ -13,6 +13,11 @@ public interface TurnGameInterface
 	public void play();
 
 	/**
+	 * change current player.
+	 */
+	public void changePlayer();
+
+	/**
 	 * visualize the player's action.
 	 */
 	public void visualize();
