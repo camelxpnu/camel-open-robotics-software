@@ -1,5 +1,6 @@
 package connectFour.Player;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import printTools.PrintTools;
@@ -14,15 +15,16 @@ public class ComputerPlayer extends GamePlayer
 	}
 
 	@Override
-	public int play(int... availableColumns)
+	public int play(ArrayList<Integer> availableColumns)
 	{
 		PrintTools.info("Hey AI, where would you put your piece?");
 		showAvailableColumns(availableColumns);
 
-		int numberOfAvailableColumns = availableColumns.length;
+		int numberOfAvailableColumns = availableColumns.size();
 		int randomNumber = randomSelecter.nextInt(numberOfAvailableColumns);
 
-		System.out.println("I WOULD PUT MY PIECE ON COLUMN [" + availableColumns[randomNumber] + "] !");
-		return availableColumns[randomNumber];
+		Integer computerSelection = availableColumns.get(randomNumber);
+		System.out.println("I WOULD PUT MY PIECE ON COLUMN [" + computerSelection + "] !");
+		return computerSelection;
 	}
 }

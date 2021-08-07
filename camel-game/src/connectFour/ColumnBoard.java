@@ -28,7 +28,7 @@ public class ColumnBoard
 
 	public void insertPiece(int playerID)
 	{
-		if (playerID != 1 || playerID != 2)
+		if (!(playerID == 1 || playerID == 2))
 		{
 			System.out.println("The playerID is not registered.");
 			return;
@@ -58,10 +58,10 @@ public class ColumnBoard
 	{
 		if (row >= getRows() || row < 0)
 		{
-			PrintTools.error("The playerID is not registered.");
+			PrintTools.error("You tried to access outside of the game board.");
 			return -1;
 		}
 
 		return occupiedData[row];
-	}
+	}	
 }

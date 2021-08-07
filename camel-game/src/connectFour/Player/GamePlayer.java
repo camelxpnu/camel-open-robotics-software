@@ -1,5 +1,7 @@
 package connectFour.Player;
 
+import java.util.ArrayList;
+
 public abstract class GamePlayer
 {
 	private final int playerID;
@@ -14,11 +16,11 @@ public abstract class GamePlayer
 		return playerID;
 	}
 
-	protected void showAvailableColumns(int[] availableColumns)
+	protected void showAvailableColumns(ArrayList<Integer> availableColumns)
 	{
-		for (int i = 0; i < availableColumns.length; i++)
+		for (int i = 0; i < availableColumns.size(); i++)
 		{
-			System.out.print(availableColumns[i] + " ");
+			System.out.print(availableColumns.get(i) + " ");
 		}
 		System.out.println();
 	}
@@ -27,5 +29,5 @@ public abstract class GamePlayer
 	 * player should answer where he would like to put his piece on which
 	 * {@link connectFour.ColumnBoard}.
 	 */
-	public abstract int play(int... availableColumns);
+	public abstract int play(ArrayList<Integer> availableColumns);
 }

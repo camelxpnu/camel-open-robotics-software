@@ -1,5 +1,6 @@
 package connectFour.Player;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import printTools.PrintTools;
@@ -12,9 +13,9 @@ public class HumanPlayer extends GamePlayer
 	{
 		super(playerID);
 	}
-	
+
 	@Override
-	public int play(int... availableColumns)
+	public int play(ArrayList<Integer> availableColumns)
 	{
 		PrintTools.info("Hey Human, where would you put your piece?");
 		showAvailableColumns(availableColumns);
@@ -25,9 +26,9 @@ public class HumanPlayer extends GamePlayer
 			scanner = new Scanner(System.in);
 			String strDesiredColumn = scanner.nextLine();
 
-			for (int i = 0; i < availableColumns.length; i++)
+			for (int i = 0; i < availableColumns.size(); i++)
 			{
-				int availableColumn = availableColumns[i];
+				int availableColumn = availableColumns.get(i);
 				String strColumn = Integer.toString(availableColumn);
 				if (strDesiredColumn.contains(strColumn))
 				{
@@ -36,7 +37,7 @@ public class HumanPlayer extends GamePlayer
 					return desiredColumn;
 				}
 			}
-			
+
 			System.out.println("Your selection is not available. ");
 			showAvailableColumns(availableColumns);
 		}
