@@ -3,16 +3,14 @@ package connectFour;
 public interface TurnGameInterface
 {
 	/**
-	 * initialize a game.
-	 * define essential game components.
+	 * initialize a game. define essential game components.
 	 */
 	public void initializeGame();
-		
+
 	/**
-	 * play game.
-	 * if the player's action is available, return true.
+	 * play game. player will be selected by game.
 	 */
-	public boolean play();
+	public void play();
 
 	/**
 	 * visualize the player's action.
@@ -23,7 +21,7 @@ public interface TurnGameInterface
 	 * check the game is completed or not.
 	 */
 	public void checkGameCompletion();
-	
+
 	/**
 	 * if the game is completed, complete the game and show the result.
 	 */
