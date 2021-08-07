@@ -9,7 +9,8 @@ import printTools.PrintTools;
 public class ConnectFourGame extends TwoPlayerTurnGame
 {
 	private final int numberOfColumnBoards;
-	private final ColumnBoard[] columBoards;
+	private final ColumnBoard[] columnBoards;
+	private static final int WINNING_NUMBER = 4;
 
 	public ConnectFourGame(int columns, int rows, GamePlayer firstPlayer, GamePlayer secondPlayer)
 	{
@@ -20,11 +21,17 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 		System.out.println("Second Player : [X].");
 
 		numberOfColumnBoards = columns;
-		columBoards = new ColumnBoard[columns];
+		columnBoards = new ColumnBoard[columns];
 		for (int i = 0; i < columns; i++)
 		{
-			columBoards[i] = new ColumnBoard(rows, i);
+			columnBoards[i] = new ColumnBoard(rows, i);
 		}
+	}
+
+	// TODO: should be removed.
+	public ColumnBoard[] getColumnBoards()
+	{
+		return columnBoards;
 	}
 
 	@Override
@@ -62,15 +69,15 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 		/**
 		 * visualize column boards.
 		 */
-		for (int i = columBoards[0].getRows() - 1; i >= 0; i--)
+		for (int i = columnBoards[0].getRows() - 1; i >= 0; i--)
 		{
 			for (int j = 0; j < numberOfColumnBoards; j++)
 			{
 				System.out.print("|");
-				if (columBoards[j].getOccupied(i) == 1)
+				if (columnBoards[j].getOccupied(i) == 1)
 				{
 					System.out.print("O");
-				} else if (columBoards[j].getOccupied(i) == 2)
+				} else if (columnBoards[j].getOccupied(i) == 2)
 				{
 					System.out.print("X");
 				} else
@@ -91,12 +98,131 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 		System.out.println("-");
 	}
 
+	private boolean isConnectFourVertical()
+	{
+		int currentPlayerID = currentPlayer.getPlayerID();
+		int numberOfRows = columnBoards[0].getRows();
+
+		for (int i = 0; i < numberOfColumnBoards; i++)
+		{
+			boolean winning = true;
+			for (int j = 0; j < numberOfRows - WINNING_NUMBER + 1; j++)
+			{
+				winning = true;
+				for (int k = 0; k < WINNING_NUMBER; k++)
+				{
+					if (columnBoards[i].getOccupied(j + k) != currentPlayerID)
+					{
+						winning = false;
+						break;
+					}
+				}
+
+				if (winning)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean isConnectFourHorizontal()
+	{
+		int currentPlayerID = currentPlayer.getPlayerID();
+		int numberOfRows = columnBoards[0].getRows();
+
+		boolean winning = true;
+		for (int i = 0; i < numberOfRows; i++)
+		{
+			for (int j = 0; j < numberOfColumnBoards - WINNING_NUMBER + 1; j++)
+			{
+				winning = true;
+				for (int k = 0; k < WINNING_NUMBER; k++)
+				{
+					if (columnBoards[j + k].getOccupied(i) != currentPlayerID)
+					{
+						winning = false;
+						break;
+					}
+				}
+
+				if (winning)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean isConnectFourDiagonalRightUp()
+	{
+		int currentPlayerID = currentPlayer.getPlayerID();
+		int numberOfRows = columnBoards[0].getRows();
+
+		boolean winning = true;
+		for (int i = 0; i < numberOfRows - WINNING_NUMBER + 1; i++)
+		{
+			for (int j = 0; j < numberOfColumnBoards - WINNING_NUMBER + 1; j++)
+			{
+				winning = true;
+				for (int k = 0; k < WINNING_NUMBER; k++)
+				{
+					if (columnBoards[j + k].getOccupied(i + k) != currentPlayerID)
+					{
+						winning = false;
+						break;
+					}
+				}
+
+				if (winning)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean isConnectFourDiagonalRightDown()
+	{
+		int currentPlayerID = currentPlayer.getPlayerID();
+		int numberOfRows = columnBoards[0].getRows();
+
+		boolean winning = true;
+		for (int i = WINNING_NUMBER - 1; i < numberOfRows; i++)
+		{
+			for (int j = 0; j < numberOfColumnBoards - WINNING_NUMBER + 1; j++)
+			{
+				winning = true;
+				for (int k = 0; k < WINNING_NUMBER; k++)
+				{
+					if (columnBoards[j + k].getOccupied(i - k) != currentPlayerID)
+					{
+						winning = false;
+						break;
+					}
+				}
+
+				if (winning)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public boolean checkGameCompletion()
 	{
 		/**
-		 * result(0): no more space. result(1): vertical connect four. result(2):
-		 * horizontal connect four. result(3): diagonal connect four.
+		 * result(0): no more space;
+		 * result(1): vertical connect four.
+		 * result(2): horizontal connect four.
+		 * result(3): diagonal connect four(right-up direction).
+		 * result(4): diagonal connect four(right-down direction).
 		 */
 		int result = -1;
 
@@ -105,7 +231,7 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 		 */
 		for (int i = 0; i < numberOfColumnBoards; i++)
 		{
-			if (columBoards[i].isFull())
+			if (columnBoards[i].isFull())
 			{
 				if (i == numberOfColumnBoards - 1)
 				{
@@ -117,17 +243,38 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 				break;
 			}
 		}
+
 		/**
 		 * check vertical connect four. if yes, result = 1;
 		 */
+		if (isConnectFourVertical())
+		{
+			result = 1;
+		}
 
 		/**
 		 * check horizontal connect four. if yes, result = 2;
 		 */
+		if (isConnectFourHorizontal())
+		{
+			result = 2;
+		}
 
 		/**
 		 * check diagonal connect four. if yes, result = 3;
 		 */
+		if (isConnectFourDiagonalRightUp())
+		{
+			result = 3;
+		}
+
+		/**
+		 * check diagonal connect four. if yes, result = 4;
+		 */
+		if (isConnectFourDiagonalRightDown())
+		{
+			result = 4;
+		}
 
 		if (result == -1)
 		{
@@ -148,7 +295,11 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 				System.out.println("Winner is " + currentPlayer.playerType());
 				break;
 			case 3:
-				System.out.println("There is diagonal connect four!");
+				System.out.println("There is diagonal(right-up direction) connect four!");
+				System.out.println("Winner is " + currentPlayer.playerType());
+				break;
+			case 4:
+				System.out.println("There is diagonal(right-down direction) connect four!");
 				System.out.println("Winner is " + currentPlayer.playerType());
 				break;
 			}
@@ -168,12 +319,12 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 		ArrayList<Integer> availableColumns = new ArrayList<Integer>();
 		for (int i = 0; i < numberOfColumnBoards; i++)
 		{
-			if (!columBoards[i].isFull())
+			if (!columnBoards[i].isFull())
 			{
 				availableColumns.add(i);
 			}
 		}
 		int playerSelction = currentPlayer.play(availableColumns);
-		columBoards[playerSelction].insertPiece(currentPlayer.getPlayerID());
+		columnBoards[playerSelction].insertPiece(currentPlayer.getPlayerID());
 	}
 }
