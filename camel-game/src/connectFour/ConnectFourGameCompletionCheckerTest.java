@@ -176,7 +176,7 @@ public class ConnectFourGameCompletionCheckerTest
 		columnBoards[5].insertPiece(2);
 		columnBoards[5].insertPiece(2);
 		columnBoards[5].insertPiece(2);
-		
+
 		columnBoards[6].insertPiece(2);
 		columnBoards[6].insertPiece(2);
 		columnBoards[6].insertPiece(2);
@@ -220,7 +220,7 @@ public class ConnectFourGameCompletionCheckerTest
 			}
 		}
 	}
-	
+
 	public static void testDiagonalRightDown()
 	{
 		int WINNING_NUMBER = 4;
@@ -276,7 +276,7 @@ public class ConnectFourGameCompletionCheckerTest
 		columnBoards[5].insertPiece(2);
 		columnBoards[5].insertPiece(2);
 		columnBoards[5].insertPiece(2);
-		
+
 		columnBoards[6].insertPiece(1);
 		columnBoards[6].insertPiece(2);
 		columnBoards[6].insertPiece(2);
@@ -292,7 +292,7 @@ public class ConnectFourGameCompletionCheckerTest
 		for (int i = WINNING_NUMBER - 1; i < numberOfRows; i++)
 		{
 			System.out.println("TEST " + i + " ROW");
-			for (int j = 0; j < numberOfColumns - WINNING_NUMBER + 1; j++) 
+			for (int j = 0; j < numberOfColumns - WINNING_NUMBER + 1; j++)
 			{
 				winning = true;
 				System.out.println(j + " column start.");
@@ -331,7 +331,7 @@ public class ConnectFourGameCompletionCheckerTest
 
 		PrintTools.info("testDiagonalRightUp");
 		testDiagonalRightUp();
-		
+
 		PrintTools.info("testDiagonalRightDown");
 		testDiagonalRightDown();
 	}

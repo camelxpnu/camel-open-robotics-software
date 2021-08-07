@@ -7,7 +7,9 @@ public class ColumnBoard
 	private final int rows;
 	private final int columnID;
 	/**
-	 * 0: not occupied. 1: first player. 2: second player.
+	 * 0: not occupied.
+	 * 1: first player.
+	 * 2: second player.
 	 */
 	private int[] occupiedData;
 
@@ -63,5 +65,5 @@ public class ColumnBoard
 		}
 
 		return occupiedData[row];
-	}	
+	}
 }

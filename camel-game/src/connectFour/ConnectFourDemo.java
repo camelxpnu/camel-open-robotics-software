@@ -17,7 +17,7 @@ public class ConnectFourDemo
 		{
 			game.play();
 			game.visualize();
-			if(game.checkGameCompletion())
+			if (game.checkGameCompletion())
 			{
 				game.completeGame();
 				break;

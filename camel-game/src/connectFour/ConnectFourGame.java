@@ -28,12 +28,6 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 		}
 	}
 
-	// TODO: should be removed.
-	public ColumnBoard[] getColumnBoards()
-	{
-		return columnBoards;
-	}
-
 	@Override
 	public void initializeGame()
 	{
@@ -77,10 +71,12 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 				if (columnBoards[j].getOccupied(i) == 1)
 				{
 					System.out.print("O");
-				} else if (columnBoards[j].getOccupied(i) == 2)
+				}
+				else if (columnBoards[j].getOccupied(i) == 2)
 				{
 					System.out.print("X");
-				} else
+				}
+				else
 				{
 					System.out.print(" ");
 				}
@@ -238,7 +234,8 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 					result = 0;
 				}
 				continue;
-			} else
+			}
+			else
 			{
 				break;
 			}
@@ -279,7 +276,8 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 		if (result == -1)
 		{
 			return false;
-		} else
+		}
+		else
 		{
 			switch (result)
 			{
@@ -288,19 +286,15 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 				break;
 			case 1:
 				System.out.println("There is vertical connect four!");
-				System.out.println("Winner is " + currentPlayer.playerType());
 				break;
 			case 2:
 				System.out.println("There is horizontal connect four!");
-				System.out.println("Winner is " + currentPlayer.playerType());
 				break;
 			case 3:
 				System.out.println("There is diagonal(right-up direction) connect four!");
-				System.out.println("Winner is " + currentPlayer.playerType());
 				break;
 			case 4:
 				System.out.println("There is diagonal(right-down direction) connect four!");
-				System.out.println("Winner is " + currentPlayer.playerType());
 				break;
 			}
 			return true;
@@ -310,7 +304,7 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 	@Override
 	public void completeGame()
 	{
-
+		System.out.println("Winner is " + currentPlayer.playerType());
 	}
 
 	@Override
@@ -327,4 +321,10 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 		int playerSelction = currentPlayer.play(availableColumns);
 		columnBoards[playerSelction].insertPiece(currentPlayer.getPlayerID());
 	}
+
+	public ColumnBoard[] getColumnBoards()
+	{
+		return columnBoards;
+	}
+
 }

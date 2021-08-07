@@ -21,7 +21,8 @@ public abstract class TwoPlayerTurnGame implements TurnGameInterface
 		if (currentPlayer == firstPlayer)
 		{
 			currentPlayer = secondPlayer;
-		} else
+		}
+		else
 		{
 			currentPlayer = firstPlayer;
 		}
