@@ -9,5 +9,19 @@ public class ConnectFourDemo
 	{
 		HumanPlayer human = new HumanPlayer(1);
 		ComputerPlayer computer = new ComputerPlayer(2);
+
+		ConnectFourGame game = new ConnectFourGame(7, 6, human, computer);
+
+		game.initializeGame();
+		while (true)
+		{
+			game.play();
+			game.visualize();
+			if(game.checkGameCompletion())
+			{
+				game.completeGame();
+				break;
+			}
+		}
 	}
 }
