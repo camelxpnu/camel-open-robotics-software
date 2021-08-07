@@ -30,4 +30,6 @@ public abstract class GamePlayer
 	 * {@link connectFour.ColumnBoard}.
 	 */
 	public abstract int play(ArrayList<Integer> availableColumns);
+
+	public abstract String playerType();
 }

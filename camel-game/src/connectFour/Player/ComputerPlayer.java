@@ -27,4 +27,10 @@ public class ComputerPlayer extends GamePlayer
 		System.out.println("I WOULD PUT MY PIECE ON COLUMN [" + computerSelection + "] !");
 		return computerSelection;
 	}
+
+	@Override
+	public String playerType()
+	{
+		return "AI";
+	}
 }

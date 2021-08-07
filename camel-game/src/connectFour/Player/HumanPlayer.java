@@ -42,4 +42,10 @@ public class HumanPlayer extends GamePlayer
 			showAvailableColumns(availableColumns);
 		}
 	}
+
+	@Override
+	public String playerType()
+	{
+		return "Human";
+	}
 }

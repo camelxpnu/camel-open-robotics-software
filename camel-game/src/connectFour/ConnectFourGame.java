@@ -94,60 +94,62 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 	@Override
 	public boolean checkGameCompletion()
 	{
+		/**
+		 * result(0): no more space. result(1): vertical connect four. result(2):
+		 * horizontal connect four. result(3): diagonal connect four.
+		 */
 		int result = -1;
+
 		/**
 		 * check there is no more empty space of column boards.
-		 * if yes, result = 0;
 		 */
 		for (int i = 0; i < numberOfColumnBoards; i++)
 		{
-			if(columBoards[i].isFull())
+			if (columBoards[i].isFull())
 			{
-				if(i == numberOfColumnBoards-1)
+				if (i == numberOfColumnBoards - 1)
 				{
 					result = 0;
 				}
 				continue;
-			}
-			else
+			} else
 			{
 				break;
 			}
 		}
 		/**
-		 * check vertical connect four.
-		 * if yes, result = 1;
+		 * check vertical connect four. if yes, result = 1;
 		 */
 
 		/**
-		 * check horizontal connect four.
-		 * if yes, result = 2;
+		 * check horizontal connect four. if yes, result = 2;
 		 */
 
 		/**
-		 * check diagonal connect four.
-		 * if yes, result = 3;
+		 * check diagonal connect four. if yes, result = 3;
 		 */
-		
-		if(result == -1)
+
+		if (result == -1)
 		{
 			return false;
-		}
-		else
+		} else
 		{
-			switch(result)
+			switch (result)
 			{
 			case 0:
 				System.out.println("There is no more space.");
 				break;
 			case 1:
 				System.out.println("There is vertical connect four!");
+				System.out.println("Winner is " + currentPlayer.playerType());
 				break;
 			case 2:
 				System.out.println("There is horizontal connect four!");
+				System.out.println("Winner is " + currentPlayer.playerType());
 				break;
 			case 3:
 				System.out.println("There is diagonal connect four!");
+				System.out.println("Winner is " + currentPlayer.playerType());
 				break;
 			}
 			return true;
