@@ -20,7 +20,7 @@ public interface TurnGameInterface
 	/**
 	 * check the game is completed or not.
 	 */
-	public void checkGameCompletion();
+	public boolean checkGameCompletion();
 
 	/**
 	 * if the game is completed, complete the game and show the result.
