@@ -115,10 +115,8 @@ public class ConnectFourGame extends TwoPlayerTurnGame
 		{
 			if (columnBoards[i].isFull())
 			{
-				PrintTools.info(i + "column is full.");
 				if (i == numberOfColumnBoards - 1)
 				{
-					PrintTools.info("all full.");
 					result = 0;
 				}
 				continue;
