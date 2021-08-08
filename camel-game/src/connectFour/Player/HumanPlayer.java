@@ -8,6 +8,11 @@ public class HumanPlayer extends GamePlayer
 	private Scanner scanner;
 	private String name;
 
+	public HumanPlayer(int playerID)
+	{
+		super(playerID);
+	}
+
 	public HumanPlayer(int playerID, String name)
 	{
 		super(playerID);
@@ -17,7 +22,7 @@ public class HumanPlayer extends GamePlayer
 	@Override
 	public int play(ArrayList<Integer> availableColumns)
 	{
-		System.out.println("Hey Human, where would you put your piece?");
+		System.out.println("Hey Human(" + name + "), where would you put your piece?");
 		showAvailableColumns(availableColumns);
 
 		int desiredColumn = -1;
