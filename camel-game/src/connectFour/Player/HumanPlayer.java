@@ -6,10 +6,12 @@ import java.util.Scanner;
 public class HumanPlayer extends GamePlayer
 {
 	private Scanner scanner;
+	private String name;
 
-	public HumanPlayer(int playerID)
+	public HumanPlayer(int playerID, String name)
 	{
 		super(playerID);
+		this.name = name;
 	}
 
 	@Override
@@ -44,6 +46,6 @@ public class HumanPlayer extends GamePlayer
 	@Override
 	public String playerType()
 	{
-		return "Human";
+		return "Human(" + name + ")";
 	}
 }

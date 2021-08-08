@@ -14,7 +14,7 @@ public class ConnectFourDemo
 {
 	public static void main(String[] args)
 	{
-		HumanPlayer human = new HumanPlayer(1);
+		HumanPlayer human = new HumanPlayer(1, "Inho");
 		ComputerPlayer computer = new ComputerPlayer(2);
 
 		TurnGameInterface game = new ConnectFourGame(7, 6, human, computer);
