@@ -29,6 +29,18 @@ public class EuclidCoreTools
 		return Double.isNaN(a) || Double.isNaN(b) || Double.isNaN(c);
 	}
 
+	public static boolean containsNaN(double a0, double a1, double a2, double a3, double a4, double a5, double a6,
+			double a7, double a8)
+	{
+		if (Double.isNaN(a0) || Double.isNaN(a1) || Double.isNaN(a2))
+			return true;
+		if (Double.isNaN(a3) || Double.isNaN(a4) || Double.isNaN(a5))
+			return true;
+		if (Double.isNaN(a6) || Double.isNaN(a7) || Double.isNaN(a8))
+			return true;
+		return false;
+	}
+
 	/**
 	 * Performs a linear interpolation from {@code a} to {@code b} given the
 	 * percentage {@code alpha}.
@@ -56,5 +68,20 @@ public class EuclidCoreTools
 	public static double squareRoot(double value)
 	{
 		return Math.sqrt(value);
+	}
+
+	public static double fastNorm(double x, double y, double z)
+	{
+		return fastSquareRoot(normSquared(x, y, z));
+	}
+
+	public static double fastSquareRoot(double squaredValueClosedToOne)
+	{
+		if (Math.abs(1.0 - squaredValueClosedToOne) < EPS_NORM_FAST_SQRT)
+			squaredValueClosedToOne = 0.5 * (1.0 + squaredValueClosedToOne);
+		else
+			squaredValueClosedToOne = EuclidCoreTools.squareRoot(squaredValueClosedToOne);
+
+		return squaredValueClosedToOne;
 	}
 }
