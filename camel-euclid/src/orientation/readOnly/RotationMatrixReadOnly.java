@@ -5,6 +5,7 @@ import org.ejml.data.DMatrix;
 import basics.Tuple3DBasics;
 import tools.EuclidCoreTools;
 import tools.RotationMatrixTools;
+import vector.readOnly.Tuple3DReadOnly;
 
 public interface RotationMatrixReadOnly
 {
@@ -239,5 +240,26 @@ public interface RotationMatrixReadOnly
 	{
 		return RotationMatrixTools.determinant(getM00(), getM01(), getM02(), getM10(), getM11(), getM12(), getM20(),
 				getM21(), getM22());
+	}
+
+	default void transform(Tuple3DBasics tupleOriginal, Tuple3DBasics tupleTransformed)
+	{
+		RotationMatrixTools.transform(this, tupleOriginal, tupleTransformed);
+	}
+
+	default void inverseTransform(Tuple3DBasics tuple3dToInverseTransform)
+	{
+		double x = getM00() * tuple3dToInverseTransform.getX() + getM10() * tuple3dToInverseTransform.getY()
+				+ getM20() * tuple3dToInverseTransform.getZ();
+		double y = getM01() * tuple3dToInverseTransform.getX() + getM11() * tuple3dToInverseTransform.getY()
+				+ getM21() * tuple3dToInverseTransform.getZ();
+		double z = getM02() * tuple3dToInverseTransform.getX() + getM12() * tuple3dToInverseTransform.getY()
+				+ getM22() * tuple3dToInverseTransform.getZ();
+		tuple3dToInverseTransform.set(x, y, z);
+	}
+
+	default void transform(Tuple3DBasics translation)
+	{
+		transform(translation, translation);
 	}
 }

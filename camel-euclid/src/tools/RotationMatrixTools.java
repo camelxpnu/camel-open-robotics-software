@@ -3,7 +3,10 @@ package tools;
 import org.ejml.MatrixDimensionException;
 import org.ejml.data.DMatrix;
 
+import basics.Tuple3DBasics;
 import orientation.RotationMatrix;
+import orientation.readOnly.RotationMatrixReadOnly;
+import vector.readOnly.Tuple3DReadOnly;
 
 public class RotationMatrixTools
 {
@@ -63,6 +66,17 @@ public class RotationMatrixTools
 		m21 *= invMagY;
 		m22 *= invMagZ;
 		matrixToNormalize.set(m00, m01, m02, m10, m11, m12, m20, m21, m22);
+	}
+
+	public static void transform(RotationMatrixReadOnly matrix, Tuple3DReadOnly tupleOriginal, Tuple3DBasics tupleTransformed)
+	{
+		double x = matrix.getM00() * tupleOriginal.getX() + matrix.getM01() * tupleOriginal.getY()
+				+ matrix.getM02() * tupleOriginal.getZ();
+		double y = matrix.getM10() * tupleOriginal.getX() + matrix.getM11() * tupleOriginal.getY()
+				+ matrix.getM12() * tupleOriginal.getZ();
+		double z = matrix.getM20() * tupleOriginal.getX() + matrix.getM21() * tupleOriginal.getY()
+				+ matrix.getM22() * tupleOriginal.getZ();
+		tupleTransformed.set(x, y, z);
 	}
 
 	public static void check3x3(DMatrix matrixToTest)
