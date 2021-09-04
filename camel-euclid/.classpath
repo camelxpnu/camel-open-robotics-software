@@ -3,10 +3,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/camel-toolkit"/>
-	<classpathentry kind="lib" path="C:/Program Files/Zulu/zulu-8/jre/lib/ext/ejml-ddense-0.41.jar" sourcepath="D:/repos/ejml-0.41-libs/ejml-ddense-0.41-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Zulu/zulu-8/jre/lib/ext/ejml-core-0.41.jar" sourcepath="D:/repos/ejml-0.41-libs/ejml-core-0.41-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Zulu/zulu-8/jre/lib/ext/ejml-dsparse-0.41.jar" sourcepath="D:/repos/ejml-0.41-libs/ejml-dsparse-0.41-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Zulu/zulu-8/jre/lib/ext/ejml-experimental-0.41.jar" sourcepath="D:/repos/ejml-0.41-libs/ejml-experimental-0.41-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Zulu/zulu-8/jre/lib/ext/ejml-simple-0.41.jar" sourcepath="D:/repos/ejml-0.41-libs/ejml-simple-0.41-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
