@@ -24,6 +24,41 @@ public class EuclidCoreTools
 	 */
 	public static final double CLAMP_EPS = 1.0e-10;
 
+	public static double tan(double a)
+	{
+		return StrictMath.tan(a);
+	}
+
+	public static double atan(double a)
+	{
+		return StrictMath.atan(a);
+	}
+
+	public static double atan2(double y, double x)
+	{
+		return StrictMath.atan2(y, x);
+	}
+
+	public static double cos(double a)
+	{
+		return StrictMath.cos(a);
+	}
+
+	public static double sin(double a)
+	{
+		return StrictMath.sin(a);
+	}
+
+	public static double acos(double a)
+	{
+		return StrictMath.acos(a);
+	}
+
+	public static double asin(double a)
+	{
+		return StrictMath.asin(a);
+	}
+
 	public static boolean containsNaN(double a, double b, double c)
 	{
 		return Double.isNaN(a) || Double.isNaN(b) || Double.isNaN(c);
@@ -65,6 +100,11 @@ public class EuclidCoreTools
 		return x * x + y * y + z * z;
 	}
 
+	public static double norm(double x, double y, double z)
+	{
+		return squareRoot(normSquared(x, y, z));
+	}
+
 	public static double squareRoot(double value)
 	{
 		return Math.sqrt(value);
@@ -84,4 +124,5 @@ public class EuclidCoreTools
 
 		return squaredValueClosedToOne;
 	}
+
 }

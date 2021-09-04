@@ -4,6 +4,8 @@ import org.ejml.MatrixDimensionException;
 import org.ejml.data.DMatrix;
 
 import basics.Tuple3DBasics;
+import orientation.AxisAngle;
+import orientation.Quaternion;
 import orientation.RotationMatrix;
 import orientation.readOnly.RotationMatrixReadOnly;
 import vector.readOnly.Tuple3DReadOnly;
@@ -68,7 +70,8 @@ public class RotationMatrixTools
 		matrixToNormalize.set(m00, m01, m02, m10, m11, m12, m20, m21, m22);
 	}
 
-	public static void transform(RotationMatrixReadOnly matrix, Tuple3DReadOnly tupleOriginal, Tuple3DBasics tupleTransformed)
+	public static void transform(RotationMatrixReadOnly matrix, Tuple3DReadOnly tupleOriginal,
+			Tuple3DBasics tupleTransformed)
 	{
 		double x = matrix.getM00() * tupleOriginal.getX() + matrix.getM01() * tupleOriginal.getY()
 				+ matrix.getM02() * tupleOriginal.getZ();
@@ -90,5 +93,17 @@ public class RotationMatrixTools
 	public static ArrayIndexOutOfBoundsException indexOutOfBoundsException(int maxIndex, int index)
 	{
 		return new ArrayIndexOutOfBoundsException("index should be in [0, " + maxIndex + "], but is: " + index);
+	}
+
+	//TODO: Implement conversions.
+	public static AxisAngle convertRotationMatrixToAxisAngle(RotationMatrix rotationMatrix)
+	{
+		return null;
+	}
+
+	//TODO: Implement conversions.
+	public static Quaternion convertRotationMatrixToQuaternion(RotationMatrix rotationMatrix)
+	{
+		return null;
 	}
 }
